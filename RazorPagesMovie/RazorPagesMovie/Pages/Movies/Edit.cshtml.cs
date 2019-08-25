@@ -53,6 +53,7 @@ namespace RazorPagesMovie.Pages.Movies
             }
             catch (DbUpdateConcurrencyException)
             {
+                // 处理并发异常，一个用户编辑了电影，另一个用户立即删除电影，则前一个用户保存时会出现并发问题。
                 if (!MovieExists(Movie.ID))
                 {
                     return NotFound();
