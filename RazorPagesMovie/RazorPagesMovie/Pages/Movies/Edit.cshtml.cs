@@ -64,6 +64,7 @@ namespace RazorPagesMovie.Pages.Movies
                 }
             }
 
+            // 注意区别./Index 和 Index 是当前路径下的Index页面，/Index是根目录Pages下面的Index页面
             return RedirectToPage("./Index");
         }
 

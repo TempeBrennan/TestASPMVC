@@ -14,6 +14,8 @@ using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie
 {
+    // http://localhost:8090/Movies
+    // 从8090后面开始，对应于Pages内部的所有 cshtml文件，如果找到的是一个folder，默认查找folder下面的index.cshtml文件
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -33,8 +35,13 @@ namespace RazorPagesMovie
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // AddMvc method can Includes support for Razor Pages and controllers.
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddRazorPagesOptions(options =>
+                {
+                    // 修改默认页面是Pages作为根目录，现在是Pages, 如果要改名字，这里就要用下面的代码了
+                    //options.RootDirectory = "/MyPages";
+                });
 
             services.AddDbContext<RazorPagesMovieContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("RazorPagesMovieContext")));
@@ -43,6 +50,7 @@ namespace RazorPagesMovie
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // app.Use 给管道里存放一系列的中间键
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

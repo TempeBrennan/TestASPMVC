@@ -38,5 +38,6 @@ namespace RazorPagesMovie
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+        // 配置启动主机时调用哪个类
     }
 }

@@ -23,6 +23,9 @@ namespace RazorPagesMovie.Pages.Movies
             return Page();
         }
 
+        [ViewData]
+        public string TestProp { get; } = "Test";
+
         [BindProperty]
         public Movie Movie { get; set; }
 
