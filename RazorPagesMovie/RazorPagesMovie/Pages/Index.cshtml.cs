@@ -14,4 +14,14 @@ namespace RazorPagesMovie.Pages
 
         }
     }
+
+    public class Student
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string GetResult<T>(T pa)
+        {
+            return pa.ToString() + " By Student";
+        }
+    }
 }

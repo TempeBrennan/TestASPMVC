@@ -94,3 +94,107 @@
         </ul>
     </div>
 </div>
+
+@*这个叫代码块，里面可以是语句，也可以是html元素，语句会被执行，而html元素会被提取出来，渲染到页面上*@
+@{
+    var stu = new Student()
+    {
+        Name = "zhangsan",
+        Age = 10
+    };
+
+    var value = 100;
+    value++;
+
+    <p>@(stu.Age)</p>
+    stu.Age++;
+    <p>@(stu.Age)</p>
+}
+
+@*这个叫表达式，它会取完值，ToString之后写入页面，里面必须是变量或者执行方法*@
+<div>@(stu.Name)</div>
+<div>@(stu.GetResult<int>(stu.Age))</div>
+
+
+
+@*下面是各种语句的用法*@
+
+@*1.if语句的使用*@
+@if (value % 2 == 0)
+{
+    <p>The value was even.</p>
+}
+else if (value >= 1337)
+{
+    <p>The value is large.</p>
+}
+else
+{
+    <p>The value is odd and small.</p>
+}
+
+@*2.switch*@
+@switch (value)
+{
+    case 1:
+        <p>The value is 1!</p>
+        break;
+    case 1337:
+        <p>Your number is 1337!</p>
+        break;
+    default:
+        <p>Your number wasn't 1 or 1337.</p>
+        break;
+}
+
+@*3.foreach*@
+@{
+    var stuList = new List<Student>()
+{
+new Student()
+{
+Name="Jack",
+Age=12
+},
+new Student()
+{
+Name="Marry",
+Age=14
+}
+};
+}
+@foreach (var student in stuList)
+{
+    <p>Name: @student.Name</p>
+    <p>Age: @student.Age</p>
+}
+
+@*4.try catch*@
+@try
+{
+    throw new Exception("This is a test exception");
+}
+catch (Exception e)
+{
+    <p>@e.Message</p>
+}
+finally
+{
+    <p>finally</p>
+}
+
+@*5.定义一个方法，并调用*@
+@functions{
+    public string GetResult()
+    {
+        return "This is result";
+    }
+}
+<div>@GetResult()</div>
+
+@*6.导入命名空间*@
+@using System.IO
+@{
+    var dir = Directory.GetCurrentDirectory();
+}
+<p>@dir</p>
